@@ -1,0 +1,41 @@
+Squashing combines multiple commits into a single commit. This is useful for keeping the commit history clean and concise.
+
+- You have several small commits during development, but before merging into the main branch, you want to present them as a 
+single commit.
+
+git rebase -i HEAD~<number_of_commits>
+
+In the editor that opens:
+Mark the first commit as `pick`.
+Change subsequent commits to `squash` or `s`.
+Save and close the editor.
+Provide a new commit message (or edit the existing one).
+
+Rebasing rewrites commit history by changing the base of a branch or modifying commits. 
+It’s useful for creating a linear, clean history.
+Integrate changes from the `main` branch into your feature branch without a merge commit.
+
+- Interactive Rebase:Edit, reorder, squash, or drop commits.
+- Upstream Rebase:Update your branch with the latest changes from another branch (e.g., `main`).
+
+1. Update your branch with `main`:
+   git checkout my-branch
+   git rebase main
+2. Resolve conflicts if any arise.
+3. Continue the rebase:
+   git rebase --continue
+   
+
+Cherry-picking applies specific commits from one branch to another. Unlike merging or rebasing, it doesn’t 
+bring over the entire branch—just the selected commits.
+Apply a bug fix from one branch to another without merging unrelated changes.
+
+1. Identify the commit hash you want to cherry-pick:
+   git log
+   
+2. Apply the commit to your current branch:
+   git cherry-pick <commit-hash>
+   
+- You want to apply commit `abc123` from `feature-branch` to `main`:
+   git checkout main
+   git cherry-pick abc123
